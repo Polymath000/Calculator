@@ -27,7 +27,7 @@ class _CalcAppState extends State<CalcApp> {
           ? ModeTheme.dark
           : ModeTheme.light,
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
