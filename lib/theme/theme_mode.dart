@@ -5,11 +5,11 @@ class ModeTheme {
     fontFamily: "WorkSans",
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color.fromARGB(255, 120, 140, 160),
+      seedColor: const Color.fromARGB(255, 102, 124, 146),
     ),
     // colorSchemeSeed: const Color(0xfff1f2f3),
   );
-  
+
   static final dark = ThemeData(
     fontFamily: "WorkSans",
     useMaterial3: true,

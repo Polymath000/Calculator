@@ -1,14 +1,22 @@
 import 'package:calculater/Widget/home_page.dart';
 import 'package:calculater/provider/mode_provider.dart';
+import 'package:calculater/provider/operation_provider.dart';
 import 'package:calculater/theme/theme_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-  runApp(ChangeNotifierProvider(
+
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
     create: (context) => ModeProvider(),
-    child: const CalcApp(),
-  ));
+  ),
+  ChangeNotifierProvider(create: (context) => OperationProvider(),)
+  ],
+  child: const CalcApp(),
+  )
+  
+  );
   // runApp(const CalcApp());
 }
 

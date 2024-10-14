@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ModeProvider extends ChangeNotifier{
-  bool _isChange = true;
-
-  bool get isChange => _isChange;
-
-  set isChange(bool value) {
-    _isChange = value;
-  }
+  bool isChange = true;
 
   changeMode(){
     if(isChange == true){

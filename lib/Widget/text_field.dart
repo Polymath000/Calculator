@@ -1,39 +1,143 @@
+import 'package:calculater/provider/mode_provider.dart';
+import 'package:calculater/provider/operation_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class textField extends StatelessWidget {
-  textField({
+class InputTextField extends StatefulWidget {
+  InputTextField({
     super.key,
-    this.opacity = 1,
-    required this.size,
-    required this.isEnabled,
   });
-  double opacity;
-  double size;
-  final bool isEnabled;
+
+  @override
+  State<InputTextField> createState() => _InputTextFieldState();
+}
+
+class _InputTextFieldState extends State<InputTextField> {
+  late TextEditingController myController;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the controller with the initial value from the provider
+    myController = TextEditingController(
+      text: Provider.of<OperationProvider>(context, listen: false).value.join(),
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Update the controller's text when the provider value changes
+    final newValue = Provider.of<OperationProvider>(context).value.join();
+    if (newValue != myController.text) {
+      myController.text = newValue;
+      myController.selection = TextSelection.collapsed(offset: newValue.length);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: opacity,
-      child: TextField(
-        readOnly: !isEnabled,
+      opacity: 0.4,
+      child: TextFormField(
+        controller: myController,
+        textCapitalization: TextCapitalization.characters,
+        readOnly: false,
         showCursor: false,
-        autofocus: !isEnabled,
+        autofocus: true,
         textAlign: TextAlign.end,
         style: TextStyle(
-          fontSize: size,
-          // color: Provider.of<ModeProvider>(context).isChange
-          //     ? darkColor
-          //     : lightColor,
+          fontSize: 50,
+          color: !Provider.of<ModeProvider>(context).isChange
+              ? Colors.black
+              : Colors.white,
         ),
         keyboardType: TextInputType.none,
         decoration: InputDecoration(
-          hintText: "Operation",
+          // hintText: myController.text,
           hintStyle: TextStyle(
-            fontSize: size,
-            // color: Provider.of<ModeProvider>(context).isChange
-            //     ? darkColor
-            //     : lightColor,
+            fontSize: 50,
+            color: !Provider.of<ModeProvider>(context).isChange
+                ? Colors.black
+                : Colors.white,
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              style: BorderStyle.none,
+            ),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              style: BorderStyle.none,
+            ),
+          ),
+          disabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              style: BorderStyle.none,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class OutputTextField extends StatefulWidget {
+  OutputTextField({
+    super.key,
+  });
+
+  @override
+  _OutputTextFieldState createState() => _OutputTextFieldState();
+}
+
+class _OutputTextFieldState extends State<OutputTextField> {
+  late TextEditingController myController;
+
+  @override
+  void initState() {
+    super.initState();
+    myController = TextEditingController(
+      text:
+          Provider.of<OperationProvider>(context, listen: false).result.join(),
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Update the controller's text when the provider value changes
+    final newValue = Provider.of<OperationProvider>(context).result.join();
+    if (newValue != myController.text) {
+      myController.text = newValue;
+      myController.selection = TextSelection.collapsed(offset: newValue.length);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: 1,
+      child: TextFormField(
+        controller: myController,
+        textCapitalization: TextCapitalization.characters,
+        readOnly: true,
+        showCursor: false,
+        textAlign: TextAlign.end,
+        style: TextStyle(
+          fontSize: 70,
+          color: !Provider.of<ModeProvider>(context).isChange
+              ? Colors.black
+              : Colors.white,
+        ),
+        keyboardType: TextInputType.none,
+        decoration: InputDecoration(
+          hintText: myController.text,
+          hintStyle: TextStyle(
+            fontSize: 70,
+            color: !Provider.of<ModeProvider>(context).isChange
+                ? Colors.black
+                : Colors.white,
           ),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
