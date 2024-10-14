@@ -11,107 +11,103 @@ class HomePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      // alignment: Alignment.bottomCenter,
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            const DarkLightMode(),
-            InputTextField(
-            ),
-            OutputTextField(
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomButtom(
-                  icon: FontAwesomeIcons.c,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.percent,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.deleteLeft,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.divide,
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomButtom(
-                  icon: FontAwesomeIcons.seven,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.eight,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.nine,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.xmark,
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomButtom(
-                  icon: FontAwesomeIcons.four,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.five,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.six,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.minus,
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomButtom(
-                  icon: FontAwesomeIcons.one,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.two,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.three,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.plus,
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomButtom(
-                  icon: Icons.adb_rounded,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.zero,
-                ),
-                CustomButtom(
-                  icon: Icons.circle,
-                ),
-                CustomButtom(
-                  icon: FontAwesomeIcons.equals,
-                ),
-              ],
-            ),
-          ],
-        ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const DarkLightMode(),
+          InputTextField(),
+          OutputTextField(),
+          const Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomButtom(
+                    icon: FontAwesomeIcons.c,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.percent,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.deleteLeft,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.divide,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomButtom(
+                    icon: FontAwesomeIcons.seven,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.eight,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.nine,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.xmark,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomButtom(
+                    icon: FontAwesomeIcons.four,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.five,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.six,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.minus,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomButtom(
+                    icon: FontAwesomeIcons.one,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.two,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.three,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.plus,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomButtom(
+                    icon: Icons.adb_rounded,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.zero,
+                  ),
+                  CustomButtom(
+                    icon: Icons.circle,
+                  ),
+                  CustomButtom(
+                    icon: FontAwesomeIcons.equals,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

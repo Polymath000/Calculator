@@ -1,6 +1,7 @@
 import 'package:calculater/provider/mode_provider.dart';
 import 'package:calculater/provider/operation_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class InputTextField extends StatefulWidget {
@@ -37,43 +38,48 @@ class _InputTextFieldState extends State<InputTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: 0.4,
-      child: TextFormField(
-        controller: myController,
-        textCapitalization: TextCapitalization.characters,
-        readOnly: false,
-        showCursor: false,
-        autofocus: true,
-        textAlign: TextAlign.end,
-        style: TextStyle(
-          fontSize: 50,
-          color: !Provider.of<ModeProvider>(context).isChange
-              ? Colors.black
-              : Colors.white,
-        ),
-        keyboardType: TextInputType.none,
-        decoration: InputDecoration(
-          // hintText: myController.text,
-          hintStyle: TextStyle(
-            fontSize: 50,
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) => Opacity(
+        opacity: 0.4,
+        child: TextFormField(
+          controller: myController,
+          textCapitalization: TextCapitalization.characters,
+          readOnly: false,
+          showCursor: false,
+          autofocus: true,
+          textAlign: TextAlign.end,
+          style: TextStyle(
+            fontSize: 30.sp,
             color: !Provider.of<ModeProvider>(context).isChange
                 ? Colors.black
                 : Colors.white,
           ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              style: BorderStyle.none,
+          keyboardType: TextInputType.none,
+          decoration: InputDecoration(
+            // hintText: myController.text,
+            hintStyle: TextStyle(
+              fontSize: 30.sp,
+              color: !Provider.of<ModeProvider>(context).isChange
+                  ? Colors.black
+                  : Colors.white,
             ),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              style: BorderStyle.none,
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                style: BorderStyle.none,
+              ),
             ),
-          ),
-          disabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              style: BorderStyle.none,
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                style: BorderStyle.none,
+              ),
+            ),
+            disabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                style: BorderStyle.none,
+              ),
             ),
           ),
         ),
@@ -116,42 +122,47 @@ class _OutputTextFieldState extends State<OutputTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: 1,
-      child: TextFormField(
-        controller: myController,
-        textCapitalization: TextCapitalization.characters,
-        readOnly: true,
-        showCursor: false,
-        textAlign: TextAlign.end,
-        style: TextStyle(
-          fontSize: 70,
-          color: !Provider.of<ModeProvider>(context).isChange
-              ? Colors.black
-              : Colors.white,
-        ),
-        keyboardType: TextInputType.none,
-        decoration: InputDecoration(
-          hintText: myController.text,
-          hintStyle: TextStyle(
-            fontSize: 70,
+    return ScreenUtilInit(
+       designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) => Opacity(
+        opacity: 1,
+        child: TextFormField(
+          controller: myController,
+          textCapitalization: TextCapitalization.characters,
+          readOnly: true,
+          showCursor: false,
+          textAlign: TextAlign.end,
+          style: TextStyle(
+            fontSize: 50.sp,
             color: !Provider.of<ModeProvider>(context).isChange
                 ? Colors.black
                 : Colors.white,
           ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              style: BorderStyle.none,
+          keyboardType: TextInputType.none,
+          decoration: InputDecoration(
+            hintText: myController.text,
+            hintStyle: TextStyle(
+              fontSize: 50.sp,
+              color: !Provider.of<ModeProvider>(context).isChange
+                  ? Colors.black
+                  : Colors.white,
             ),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              style: BorderStyle.none,
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                style: BorderStyle.none,
+              ),
             ),
-          ),
-          disabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              style: BorderStyle.none,
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                style: BorderStyle.none,
+              ),
+            ),
+            disabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                style: BorderStyle.none,
+              ),
             ),
           ),
         ),
