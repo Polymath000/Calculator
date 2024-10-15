@@ -14,10 +14,9 @@ addToValueList(List value, String text, List result) {
 
 class OperationProvider extends ChangeNotifier {
   List value = [];
-  List result = [];
+  List result = [""];
   changeOperationField({required IconData icon}) {
     result.isNotEmpty ? result.clear() : "";
-    result.add("");
     if (icon == FontAwesomeIcons.c) {
       value.clear();
     } else if (icon == FontAwesomeIcons.percent) {
@@ -27,6 +26,7 @@ class OperationProvider extends ChangeNotifier {
             value.last == "x" ||
             value.last == "/")) {
           value.add('%');
+          equalOperartor(value, result);
         }
       }
     } else if (icon == FontAwesomeIcons.deleteLeft) {
@@ -115,7 +115,11 @@ void equalOperartor(List value, List result) {
         } else if (i == "%") {
           result.add(i);
         } else {
-          result.last += i;
+          if(result.isEmpty){
+            result.add(i);
+          }else {
+            result.last += i;
+          }
         }
       }
       OperationMultiAndDivide(result);
@@ -127,8 +131,8 @@ void equalOperartor(List value, List result) {
 OperationMultiAndDivide(List result) {
   for (int i = 1; i < result.length;) {
     if (result[i] == "%") {
-      result[i] = (double.parse(result[i - 1]) / 100);
-      result[i - 1] = "";
+      result[i] = result[i - 1] is String ?(double.parse(result[i - 1]) / 100) :result[i - 1] / 100;
+      result.removeAt(i-1);
       i++;
     } else {
       if (result[i] == "/") {

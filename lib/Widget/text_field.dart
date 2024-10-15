@@ -103,6 +103,7 @@ class _OutputTextFieldState extends State<OutputTextField> {
   @override
   void initState() {
     super.initState();
+    
     myController = TextEditingController(
       text:
           Provider.of<OperationProvider>(context, listen: false).result.join(),
@@ -112,7 +113,6 @@ class _OutputTextFieldState extends State<OutputTextField> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Update the controller's text when the provider value changes
     final newValue = Provider.of<OperationProvider>(context).result.join();
     if (newValue != myController.text) {
       myController.text = newValue;
@@ -123,7 +123,7 @@ class _OutputTextFieldState extends State<OutputTextField> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-       designSize: const Size(360, 690),
+      designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) => Opacity(
