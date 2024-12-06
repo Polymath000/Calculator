@@ -31,16 +31,7 @@ class _InputTextFieldState extends State<InputTextField> {
     final newValue = Provider.of<OperationProvider>(context).value.join();
     final equlClickled = Provider.of<OperationProvider>(context).equlClickled;
     if (newValue != myController.text) {
-      try {
-        if (equlClickled) {
-          myController.text = newValue;
-        } else {
-          myController.text = newValue;
-        }
-      } catch (e) {
-        myController.text = newValue;
-      }
-      // myController.selection = TextSelection.collapsed(offset: newValue.length);
+    myController.text = newValue;
     }
   }
 
@@ -122,29 +113,9 @@ class _OutputTextFieldState extends State<OutputTextField> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     var newValue = Provider.of<OperationProvider>(context).result;
-
-    // for (int i = 0; i > newValue.length - 4; i++) {
-    //   if (int.parse(newValue[i]) == 0) {
-    //     newValue = newValue.removeLast();
-    //   }
-    // }
     if (newValue != myController.text) {
-      try {
-        String result = newValue.join();
-        // if (double.parse(result[result.length - 1]) == 0) {
-        //   result = result.substring(0, result.length - 1);
-        // }
-        // if (double.parse(result[result.length - 2]) == 0) {
-        //   result = result.substring(0, result.length - 1);
-        // }
-        // if (double.parse(result[result.length - 3]) == 0) {
-        //   result = result.substring(0, result.length - 2);
-        // }
-        myController.text = result.toString();
-      } catch (e) {
-        myController.text = "";
-      }
-      // myController.selection = TextSelection.collapsed(offset: newValue.length);
+      String result = newValue.join();
+      myController.text = result.toString();
     }
   }
 
