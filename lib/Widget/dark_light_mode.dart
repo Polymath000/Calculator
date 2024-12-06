@@ -41,7 +41,7 @@ class _DarkLightModeState extends State<DarkLightMode> {
                   }),
             ),
             Positioned(
-              left: !isChange ? 60.0.w : 40.0.w,
+              left: !isChange ? 60.0.w : 36.0.w,
               child: Icon(
                 !isChange
                     ? Icons.nightlight_outlined
