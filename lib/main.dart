@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-    create: (context) => ModeProvider(),
-  ),
-  ChangeNotifierProvider(create: (context) => OperationProvider(),)
-  ],
-  child: const CalcApp(),
-  )
-  
-  );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => ModeProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => OperationProvider(),
+      )
+    ],
+    child: const CalcApp(),
+  ));
   // runApp(const CalcApp());
 }
 

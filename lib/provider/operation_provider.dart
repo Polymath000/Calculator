@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-addToValueList(List value, String text, List result) {
+addToValueList(
+  List value,
+  String text,
+  List result,
+) {
   if (value.isEmpty) {
     value.add(text);
   } else {
@@ -13,10 +17,19 @@ addToValueList(List value, String text, List result) {
 }
 
 class OperationProvider extends ChangeNotifier {
+  bool equlClickled = false;
+
   List value = [];
   List result = [""];
   changeOperationField({required IconData icon}) {
+    equlClickled = false;
     result.isNotEmpty ? result.clear() : "";
+    bool checkOperator = value.isNotEmpty &&
+        value.last != '.' &&
+        value.last != 'x' &&
+        value.last != '-' &&
+        value.last != '+' &&
+        value.last != '/';
     if (icon == FontAwesomeIcons.c) {
       value.clear();
     } else if (icon == FontAwesomeIcons.percent) {
@@ -26,44 +39,79 @@ class OperationProvider extends ChangeNotifier {
             value.last == "x" ||
             value.last == "/")) {
           value.add('%');
-          equalOperartor(value, result);
         }
       }
     } else if (icon == FontAwesomeIcons.deleteLeft) {
       value.isEmpty ? "" : value.removeLast();
       equalOperartor(value, result);
     } else if (icon == FontAwesomeIcons.divide) {
-      if (value.isNotEmpty && value.last != '.') {
+      if (checkOperator) {
         value.add('/');
       }
     } else if (icon == FontAwesomeIcons.seven) {
-      addToValueList(value, "7", result);
+      addToValueList(
+        value,
+        "7",
+        result,
+      );
     } else if (icon == FontAwesomeIcons.eight) {
-      addToValueList(value, "8", result);
+      addToValueList(
+        value,
+        "8",
+        result,
+      );
     } else if (icon == FontAwesomeIcons.nine) {
-      addToValueList(value, "9", result);
+      addToValueList(
+        value,
+        "9",
+        result,
+      );
     } else if (icon == FontAwesomeIcons.xmark) {
-      if (value.isNotEmpty && value.last != '.') {
+      if (checkOperator) {
         value.add('x');
       }
     } else if (icon == FontAwesomeIcons.four) {
-      addToValueList(value, "4", result);
+      addToValueList(
+        value,
+        "4",
+        result,
+      );
     } else if (icon == FontAwesomeIcons.five) {
-      addToValueList(value, "5", result);
+      addToValueList(
+        value,
+        "5",
+        result,
+      );
     } else if (icon == FontAwesomeIcons.six) {
-      addToValueList(value, "6", result);
+      addToValueList(
+        value,
+        "6",
+        result,
+      );
     } else if (icon == FontAwesomeIcons.minus) {
-      if (value.isNotEmpty && value.last != '.') {
+      if (checkOperator) {
         value.add('-');
       }
     } else if (icon == FontAwesomeIcons.one) {
-      addToValueList(value, "1", result);
+      addToValueList(
+        value,
+        "1",
+        result,
+      );
     } else if (icon == FontAwesomeIcons.two) {
-      addToValueList(value, "2", result);
+      addToValueList(
+        value,
+        "2",
+        result,
+      );
     } else if (icon == FontAwesomeIcons.three) {
-      addToValueList(value, "3", result);
+      addToValueList(
+        value,
+        "3",
+        result,
+      );
     } else if (icon == FontAwesomeIcons.plus) {
-      if (value.isNotEmpty && value.last != '.') {
+      if (checkOperator) {
         value.add('+');
       }
     } else if (icon == FontAwesomeIcons.zero) {
@@ -91,10 +139,19 @@ class OperationProvider extends ChangeNotifier {
             value.add('.');
           }
         }
-        equalOperartor(value, result);
+        // equalOperartor(value, result);
       }
     } else if (icon == FontAwesomeIcons.equals) {
+      equlClickled = true;
       equalOperartor(value, result);
+      if (!(result.join() == value.join()) && !(result.join() == "Not Valid")) {
+        value.clear();
+        for (dynamic str in result) {
+          value.addAll(str.toString().split(''));
+        }
+        result.clear();
+        result.add("");
+      }
     }
     notifyListeners();
   }
@@ -115,24 +172,26 @@ void equalOperartor(List value, List result) {
         } else if (i == "%") {
           result.add(i);
         } else {
-          if(result.isEmpty){
+          if (result.isEmpty) {
             result.add(i);
-          }else {
+          } else {
             result.last += i;
           }
         }
       }
-      OperationMultiAndDivide(result);
-      OperationPlusAndMinus(result);
+      operationMultiAndDivide(result);
+      operationPlusAndMinus(result);
     }
   }
 }
 
-OperationMultiAndDivide(List result) {
+operationMultiAndDivide(List result) {
   for (int i = 1; i < result.length;) {
     if (result[i] == "%") {
-      result[i] = result[i - 1] is String ?(double.parse(result[i - 1]) / 100) :result[i - 1] / 100;
-      result.removeAt(i-1);
+      result[i] = result[i - 1] is String
+          ? (double.parse(result[i - 1]) / 100)
+          : result[i - 1] / 100;
+      result.removeAt(i - 1);
       i++;
     } else {
       if (result[i] == "/") {
@@ -166,7 +225,7 @@ OperationMultiAndDivide(List result) {
   }
 }
 
-OperationPlusAndMinus(List result) {
+operationPlusAndMinus(List result) {
   for (int i = 1; result.length != 1;) {
     if (result[i] == "+") {
       var leftOperand =

@@ -28,11 +28,19 @@ class _InputTextFieldState extends State<InputTextField> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Update the controller's text when the provider value changes
     final newValue = Provider.of<OperationProvider>(context).value.join();
+    final equlClickled = Provider.of<OperationProvider>(context).equlClickled;
     if (newValue != myController.text) {
-      myController.text = newValue;
-      myController.selection = TextSelection.collapsed(offset: newValue.length);
+      try {
+        if (equlClickled) {
+          myController.text = newValue;
+        } else {
+          myController.text = newValue;
+        }
+      } catch (e) {
+        myController.text = newValue;
+      }
+      // myController.selection = TextSelection.collapsed(offset: newValue.length);
     }
   }
 
@@ -103,7 +111,7 @@ class _OutputTextFieldState extends State<OutputTextField> {
   @override
   void initState() {
     super.initState();
-    
+
     myController = TextEditingController(
       text:
           Provider.of<OperationProvider>(context, listen: false).result.join(),
@@ -113,10 +121,30 @@ class _OutputTextFieldState extends State<OutputTextField> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final newValue = Provider.of<OperationProvider>(context).result.join();
+    var newValue = Provider.of<OperationProvider>(context).result;
+
+    // for (int i = 0; i > newValue.length - 4; i++) {
+    //   if (int.parse(newValue[i]) == 0) {
+    //     newValue = newValue.removeLast();
+    //   }
+    // }
     if (newValue != myController.text) {
-      myController.text = newValue;
-      myController.selection = TextSelection.collapsed(offset: newValue.length);
+      try {
+        String result = newValue.join();
+        // if (double.parse(result[result.length - 1]) == 0) {
+        //   result = result.substring(0, result.length - 1);
+        // }
+        // if (double.parse(result[result.length - 2]) == 0) {
+        //   result = result.substring(0, result.length - 1);
+        // }
+        // if (double.parse(result[result.length - 3]) == 0) {
+        //   result = result.substring(0, result.length - 2);
+        // }
+        myController.text = result.toString();
+      } catch (e) {
+        myController.text = "";
+      }
+      // myController.selection = TextSelection.collapsed(offset: newValue.length);
     }
   }
 
