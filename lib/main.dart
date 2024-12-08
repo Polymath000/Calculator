@@ -1,7 +1,7 @@
-import 'package:calculater/Widget/home_page.dart';
-import 'package:calculater/provider/mode_provider.dart';
-import 'package:calculater/provider/operation_provider.dart';
-import 'package:calculater/theme/theme_mode.dart';
+import 'package:calculator/Widget/home_page.dart';
+import 'package:calculator/provider/mode_provider.dart';
+import 'package:calculator/provider/operation_provider.dart';
+import 'package:calculator/theme/theme_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

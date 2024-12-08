@@ -1,6 +1,6 @@
-import 'package:calculater/Widget/custom_buttom.dart';
-import 'package:calculater/Widget/dark_light_mode.dart';
-import 'package:calculater/Widget/text_field.dart';
+import 'package:calculator/Widget/custom_buttom.dart';
+import 'package:calculator/Widget/dark_light_mode.dart';
+import 'package:calculator/Widget/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

@@ -24,12 +24,18 @@ class OperationProvider extends ChangeNotifier {
   changeOperationField({required IconData icon}) {
     equlClickled = false;
     result.isNotEmpty ? result.clear() : "";
-    bool checkOperator = value.isNotEmpty &&
-        value.last != '.' &&
-        value.last != 'x' &&
-        value.last != '-' &&
-        value.last != '+' &&
-        value.last != '/';
+    bool checkOperator = icon == FontAwesomeIcons.minus
+        ? value.last != '.' &&
+            value.last != 'x' &&
+            value.last != '-' &&
+            value.last != '+' &&
+            value.last != '/'
+        : value.isNotEmpty &&
+            value.last != '.' &&
+            value.last != 'x' &&
+            value.last != '-' &&
+            value.last != '+' &&
+            value.last != '/';
     if (icon == FontAwesomeIcons.c) {
       value.clear();
     } else if (icon == FontAwesomeIcons.percent) {
@@ -139,7 +145,7 @@ class OperationProvider extends ChangeNotifier {
             value.add('.');
           }
         }
-        // equalOperartor(value, result);
+        equalOperartor(value, result);
       }
     } else if (icon == FontAwesomeIcons.equals) {
       equlClickled = true;
@@ -165,17 +171,24 @@ void equalOperartor(List value, List result) {
         value.last == "/") {
       result.add("Not Valid");
     } else {
-      for (var i in value) {
-        if (i == "/" || i == "x" || i == "-" || i == "+") {
-          result.add(i);
-          result.add('');
-        } else if (i == "%") {
-          result.add(i);
+      for (int i = 0; i < value.length; i++) {
+        if ((value[i] == "/" ||
+            value[i] == "x" ||
+            value[i] == "-" ||
+            value[i] == "+")) {
+          if (i == 0) {
+            result.add(value[i]);
+          } else {
+            result.add(value[i]);
+            result.add('');
+          }
+        } else if (value[i] == "%") {
+          result.add(value[i]);
         } else {
           if (result.isEmpty) {
-            result.add(i);
+            result.add(value[i]);
           } else {
-            result.last += i;
+            result.last += value[i];
           }
         }
       }
@@ -204,9 +217,13 @@ operationMultiAndDivide(List result) {
         if (rightOperand == 0) {
           result.add("Not Valid");
         } else {
-          result[i + 1] = leftOperand / rightOperand;
+          if (leftOperand == '-') {
+            rightOperand *= -1;
+          } else {
+            result[i + 1] = leftOperand / rightOperand;
+            result.removeAt(i);
+          }
         }
-        result.removeAt(i);
         result.removeAt(i - 1);
       } else if (result[i] == "x") {
         var leftOperand = result[i - 1] is String
@@ -215,8 +232,12 @@ operationMultiAndDivide(List result) {
         var rightOperand = result[i + 1] is String
             ? double.parse(result[i + 1])
             : result[i + 1];
-        result[i + 1] = leftOperand * rightOperand;
-        result.removeAt(i);
+        if (leftOperand == '-') {
+          rightOperand *= -1;
+        } else {
+          result[i + 1] = leftOperand * rightOperand;
+          result.removeAt(i);
+        }
         result.removeAt(i - 1);
       } else {
         i++;
@@ -232,16 +253,25 @@ operationPlusAndMinus(List result) {
           result[i - 1] is String ? double.parse(result[i - 1]) : result[i - 1];
       var rightOperand =
           result[i + 1] is String ? double.parse(result[i + 1]) : result[i + 1];
-      result[i + 1] = leftOperand + rightOperand;
-      result.removeAt(i);
+      if (leftOperand == '-') {
+        rightOperand *= -1;
+      } else {
+        result[i + 1] = leftOperand + rightOperand;
+        result.removeAt(i);
+      }
+
       result.removeAt(i - 1);
     } else if (result[i] == "-") {
       var leftOperand =
           result[i - 1] is String ? double.parse(result[i - 1]) : result[i - 1];
       var rightOperand =
           result[i + 1] is String ? double.parse(result[i + 1]) : result[i + 1];
-      result[i + 1] = leftOperand - rightOperand;
-      result.removeAt(i);
+      if (leftOperand == '-') {
+        rightOperand *= -1;
+      } else {
+        result[i + 1] = leftOperand - rightOperand;
+        result.removeAt(i);
+      }
       result.removeAt(i - 1);
     }
   }
