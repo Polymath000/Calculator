@@ -5,7 +5,9 @@ addToValueList(
   List value,
   String text,
   List result,
-) {
+) 
+
+{
   if (value.isEmpty) {
     value.add(text);
   } else {
