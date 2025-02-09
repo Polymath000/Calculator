@@ -5,9 +5,7 @@ addToValueList(
   List value,
   String text,
   List result,
-) 
-
-{
+) {
   if (value.isEmpty) {
     value.add(text);
   } else {
@@ -26,18 +24,20 @@ class OperationProvider extends ChangeNotifier {
   changeOperationField({required IconData icon}) {
     equlClickled = false;
     result.isNotEmpty ? result.clear() : "";
-    bool checkOperator = icon == FontAwesomeIcons.minus
-        ? value.last != '.' &&
-            value.last != 'x' &&
-            value.last != '-' &&
-            value.last != '+' &&
-            value.last != '/'
-        : value.isNotEmpty &&
-            value.last != '.' &&
-            value.last != 'x' &&
-            value.last != '-' &&
-            value.last != '+' &&
-            value.last != '/';
+    bool checkOperator = value.isEmpty
+        ? icon == FontAwesomeIcons.minus // Allow minus if list is empty
+        : (icon == FontAwesomeIcons.minus
+            ? value.last != '.' &&
+                value.last != 'x' &&
+                value.last != '-' &&
+                value.last != '+' &&
+                value.last != '/'
+            : value.isNotEmpty &&
+                value.last != '.' &&
+                value.last != 'x' &&
+                value.last != '-' &&
+                value.last != '+' &&
+                value.last != '/');
     if (icon == FontAwesomeIcons.c) {
       value.clear();
     } else if (icon == FontAwesomeIcons.percent) {
