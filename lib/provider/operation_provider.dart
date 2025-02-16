@@ -21,6 +21,14 @@ class OperationProvider extends ChangeNotifier {
 
   List value = [];
   List result = [""];
+  
+  void clearAll() {
+    value.clear();
+    result.clear();
+    result.add("");
+    notifyListeners();
+  }
+
   changeOperationField({required IconData icon}) {
     equlClickled = false;
     result.isNotEmpty ? result.clear() : "";

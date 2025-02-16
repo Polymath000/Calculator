@@ -18,7 +18,7 @@ class HomePageBody extends StatelessWidget {
           const DarkLightMode(),
           InputTextField(),
           OutputTextField(),
-          const Column(
+          Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
