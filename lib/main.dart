@@ -17,7 +17,6 @@ void main() async {
     ],
     child: const CalcApp(),
   ));
-  // runApp(const CalcApp());
 }
 
 class CalcApp extends StatefulWidget {

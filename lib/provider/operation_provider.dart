@@ -21,7 +21,7 @@ class OperationProvider extends ChangeNotifier {
 
   List value = [];
   List result = [""];
-  
+
   void clearAll() {
     value.clear();
     result.clear();
@@ -46,6 +46,7 @@ class OperationProvider extends ChangeNotifier {
                 value.last != '-' &&
                 value.last != '+' &&
                 value.last != '/');
+
     if (icon == FontAwesomeIcons.c) {
       value.clear();
     } else if (icon == FontAwesomeIcons.percent) {
@@ -55,6 +56,7 @@ class OperationProvider extends ChangeNotifier {
             value.last == "x" ||
             value.last == "/")) {
           value.add('%');
+          equalOperartor(value, result);
         }
       }
     } else if (icon == FontAwesomeIcons.deleteLeft) {
@@ -211,47 +213,36 @@ void equalOperartor(List value, List result) {
 operationMultiAndDivide(List result) {
   for (int i = 1; i < result.length;) {
     if (result[i] == "%") {
-      result[i] = result[i - 1] is String
+      // Convert the number before % to its percentage value
+      result[i - 1] = result[i - 1] is String
           ? (double.parse(result[i - 1]) / 100)
           : result[i - 1] / 100;
-      result.removeAt(i - 1);
-      i++;
-    } else {
+      // Remove the % symbol
+      result.removeAt(i);
+      // Don't increment i since we removed an element
+      continue;
+    } else if (result[i] == "/" || result[i] == "x") {
+      var leftOperand =
+          result[i - 1] is String ? double.parse(result[i - 1]) : result[i - 1];
+      var rightOperand =
+          result[i + 1] is String ? double.parse(result[i + 1]) : result[i + 1];
+
       if (result[i] == "/") {
-        var leftOperand = result[i - 1] is String
-            ? double.parse(result[i - 1])
-            : result[i - 1];
-        var rightOperand = result[i + 1] is String
-            ? double.parse(result[i + 1])
-            : result[i + 1];
         if (rightOperand == 0) {
+          result.clear();
           result.add("Not Valid");
-        } else {
-          if (leftOperand == '-') {
-            rightOperand *= -1;
-          } else {
-            result[i + 1] = leftOperand / rightOperand;
-            result.removeAt(i);
-          }
+          return;
         }
-        result.removeAt(i - 1);
-      } else if (result[i] == "x") {
-        var leftOperand = result[i - 1] is String
-            ? double.parse(result[i - 1])
-            : result[i - 1];
-        var rightOperand = result[i + 1] is String
-            ? double.parse(result[i + 1])
-            : result[i + 1];
-        if (leftOperand == '-') {
-          rightOperand *= -1;
-        } else {
-          result[i + 1] = leftOperand * rightOperand;
-          result.removeAt(i);
-        }
-        result.removeAt(i - 1);
+        result[i + 1] = leftOperand / rightOperand;
       } else {
-        i++;
+        // multiplication
+        result[i + 1] = leftOperand * rightOperand;
       }
+
+      result.removeAt(i);
+      result.removeAt(i - 1);
+    } else {
+      i++;
     }
   }
 }

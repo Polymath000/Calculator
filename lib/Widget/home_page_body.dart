@@ -18,7 +18,7 @@ class HomePageBody extends StatelessWidget {
           const DarkLightMode(),
           InputTextField(),
           OutputTextField(),
-          Column(
+          const Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -91,9 +91,6 @@ class HomePageBody extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  CustomButtom(
-                    icon: Icons.adb_rounded,
-                  ),
                   CustomButtom(
                     icon: FontAwesomeIcons.zero,
                   ),
