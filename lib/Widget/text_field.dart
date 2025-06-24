@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class InputTextField extends StatefulWidget {
-  InputTextField({
+  const InputTextField({
     super.key,
   });
 
@@ -31,7 +31,7 @@ class _InputTextFieldState extends State<InputTextField> {
     final newValue = Provider.of<OperationProvider>(context).value.join();
     final equlClickled = Provider.of<OperationProvider>(context).equlClickled;
     if (newValue != myController.text) {
-    myController.text = newValue;
+      myController.text = newValue;
     }
   }
 
@@ -88,7 +88,7 @@ class _InputTextFieldState extends State<InputTextField> {
 }
 
 class OutputTextField extends StatefulWidget {
-  OutputTextField({
+  const OutputTextField({
     super.key,
   });
 
